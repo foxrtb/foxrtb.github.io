@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+
+function getAverageBlock()
+{
+var xmlHttp = new XMLHttpRequest();
+xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            var resp=JSON.parse(resultofAPiCall);
+   var data = resp.data;
+   var sum=0;
+   for (let i=0; i<65; i++) {
+      sum=sum+data[i].amount
+   };
+
+avgBlock = sum/64;
+return avgBlock;
+    }
+    xmlHttp.open("GET", "http://usa.pacblockexplorer.com:3002/ext/getlasttxs/10/100", true); // true for asynchronous
+    xmlHttp.send(null);
+}
+</script>
+
+
+
+</head>
+
+<body>
+
+<h1>A Web Page</h1>
+<p id="getAverageBlock"></p>
+<script type="text/javascript">
+console.log("avg:"+getAverageBlock())
+</script>
+
+</body>
+</html>
